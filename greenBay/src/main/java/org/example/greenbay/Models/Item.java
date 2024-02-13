@@ -2,8 +2,6 @@ package org.example.greenbay.Models;
 
 import jakarta.persistence.*;
 
-import java.util.List;
-
 @Entity
 @Table(name = "items")
 public class Item {
