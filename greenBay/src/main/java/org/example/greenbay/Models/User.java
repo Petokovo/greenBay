@@ -17,7 +17,7 @@ public class User {
   private String password;
 
   @Column(name = "dollars", nullable = false)
-  private Integer dollars;
+  private double dollars;
 
   @Column(name = "token", unique = true)
   private String token;
@@ -59,11 +59,11 @@ public class User {
     this.password = password;
   }
 
-  public Integer getDollars() {
+  public double getDollars() {
     return dollars;
   }
 
-  public void setDollars(Integer dollars) {
+  public void setDollars(double dollars) {
     this.dollars = dollars;
   }
 

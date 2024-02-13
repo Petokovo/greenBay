@@ -20,9 +20,10 @@ public class Bid {
   @JoinColumn(name = "item_id", nullable = false)
   private Item item;
 
-  public Bid(double bidValue, String username) {
+  public Bid(double bidValue, String username, Item item) {
     this.bidValue = bidValue;
     this.username = username;
+    this.item = item;
   }
 
   public Bid() {}
