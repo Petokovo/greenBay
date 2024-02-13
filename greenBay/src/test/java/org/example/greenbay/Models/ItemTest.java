@@ -10,7 +10,7 @@ class ItemTest {
 
   @BeforeEach
   void setup() {
-    user = new User("Jack", "password", "token", 0L);
+    user = new User("Jack", "password");
   }
 
   @Test

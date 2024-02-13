@@ -19,18 +19,10 @@ public class User {
   @Column(name = "dollars", nullable = false)
   private double dollars;
 
-  @Column(name = "token", unique = true)
-  private String token;
-
-  @Column(name = "expires_at")
-  private Long expiresAt;
-
-  public User(String username, String password, String token, Long expiresAt) {
+  public User(String username, String password) {
     this.username = username;
     this.password = password;
     this.dollars = 0;
-    this.token = token;
-    this.expiresAt = expiresAt;
   }
 
   public User() {}
@@ -65,21 +57,5 @@ public class User {
 
   public void setDollars(double dollars) {
     this.dollars = dollars;
-  }
-
-  public String getToken() {
-    return token;
-  }
-
-  public void setToken(String token) {
-    this.token = token;
-  }
-
-  public Long getExpiresAt() {
-    return expiresAt;
-  }
-
-  public void setExpiresAt(Long expiresAt) {
-    this.expiresAt = expiresAt;
   }
 }
