@@ -2,7 +2,7 @@
 
 Copy of ebay
 
-Feature details
+#Feature details
 
 As a user I can sign in to the application
 Providing a username and password
