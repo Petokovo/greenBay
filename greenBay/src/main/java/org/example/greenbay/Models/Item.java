@@ -32,9 +32,6 @@ public class Item {
   @Column(name = "sellable", nullable = false)
   private boolean sellable;
 
-  @OneToMany(mappedBy = "item", cascade = CascadeType.ALL)
-  private List<Bid> bids;
-
   @ManyToOne
   @JoinColumn(name = "user_id", nullable = false)
   private User user;
@@ -112,14 +109,6 @@ public class Item {
 
   public void setSellable(boolean sellable) {
     this.sellable = sellable;
-  }
-
-  public List<Bid> getBids() {
-    return bids;
-  }
-
-  public void setBids(List<Bid> bids) {
-    this.bids = bids;
   }
 
   public User getUser() {

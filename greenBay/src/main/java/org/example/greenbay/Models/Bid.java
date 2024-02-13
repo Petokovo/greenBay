@@ -16,6 +16,10 @@ public class Bid {
   @Column(name = "username", nullable = false)
   private String username;
 
+  @ManyToOne
+  @JoinColumn(name = "item_id", nullable = false)
+  private Item item;
+
   public Bid(double bidValue, String username) {
     this.bidValue = bidValue;
     this.username = username;
@@ -23,12 +27,12 @@ public class Bid {
 
   public Bid() {}
 
-  public void setId(Long id) {
-    this.id = id;
-  }
-
   public Long getId() {
     return id;
+  }
+
+  public void setId(Long id) {
+    this.id = id;
   }
 
   public double getBidValue() {
@@ -45,5 +49,13 @@ public class Bid {
 
   public void setUsername(String username) {
     this.username = username;
+  }
+
+  public Item getItem() {
+    return item;
+  }
+
+  public void setItem(Item item) {
+    this.item = item;
   }
 }
