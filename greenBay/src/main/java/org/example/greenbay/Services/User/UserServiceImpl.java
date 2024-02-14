@@ -10,8 +10,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import javax.security.auth.login.CredentialException;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -55,20 +58,20 @@ public class UserServiceImpl implements UserService {
   }
 
   @Override
-  public ResponseEntity<Object> loginUser(LoginRequest request) {
+  public ResponseEntity<Object> loginUser(LoginRequest request) throws CredentialException {
     if (request.getUsername() == null || request.getUsername().isEmpty()) {
       return ResponseEntity.status(400).body("Username is required");
     } else if (request.getPassword() == null || request.getPassword().isEmpty()) {
       return ResponseEntity.status(400).body("Password is required");
     } else if (!userRepository.existsByUsername(request.getUsername())) {
       return ResponseEntity.status(400).body("User not found");
-    } else if (request.getPassword() != userRepository.getPasswordFromUser(request.getUsername())) {
-      return ResponseEntity.status(400).body("Incorrect password");
     }
-
-    authenticationManager.authenticate(
-        new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword()));
-
+    try {
+      authenticationManager.authenticate(
+          new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword()));
+    } catch (AuthenticationException e) {
+      throw new CredentialException("Invalid password");
+    }
     User user = userRepository.findByUsername(request.getUsername());
 
     String jwtToken = jwtService.generateToken(user);

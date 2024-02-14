@@ -5,6 +5,8 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
+import org.example.greenbay.Repositories.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
@@ -17,6 +19,13 @@ import java.util.function.Function;
 
 @Service
 public class JwtServiceImpl implements JwtService {
+  private final UserRepository userRepository;
+
+  @Autowired
+  public JwtServiceImpl(UserRepository userRepository) {
+    this.userRepository = userRepository;
+  }
+
   @Value("${JWT_SECRET_KEY}")
   private String JWT_SECRET_KEY;
 
@@ -38,9 +47,13 @@ public class JwtServiceImpl implements JwtService {
 
   @Override
   public String generateToken(Map<String, Object> extraClaims, UserDetails userDetails) {
+    Long id = userRepository.findByUsername(userDetails.getUsername()).getId();
+
+    extraClaims.put("id", id);
+    extraClaims.put("username", userDetails.getUsername());
+
     return Jwts.builder()
         .setClaims(extraClaims)
-        .setSubject(userDetails.getUsername())
         .setIssuedAt(new Date(System.currentTimeMillis()))
         // valid for 24hours
         .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 24))

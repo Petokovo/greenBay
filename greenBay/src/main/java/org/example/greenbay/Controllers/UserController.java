@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.security.auth.login.CredentialException;
+
 @RestController
 public class UserController {
   private final UserService userService;
@@ -24,7 +26,8 @@ public class UserController {
   }
 
   @PostMapping("/login")
-  public ResponseEntity<Object> register(@RequestBody LoginRequest request) {
+  public ResponseEntity<Object> register(@RequestBody LoginRequest request)
+      throws CredentialException {
     return userService.loginUser(request);
   }
 }
