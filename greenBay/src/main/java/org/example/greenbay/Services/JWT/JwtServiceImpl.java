@@ -48,12 +48,11 @@ public class JwtServiceImpl implements JwtService {
   @Override
   public String generateToken(Map<String, Object> extraClaims, UserDetails userDetails) {
     Long id = userRepository.findByUsername(userDetails.getUsername()).getId();
-
     extraClaims.put("id", id);
-    extraClaims.put("username", userDetails.getUsername());
 
     return Jwts.builder()
         .setClaims(extraClaims)
+        .setSubject(userDetails.getUsername())
         .setIssuedAt(new Date(System.currentTimeMillis()))
         // valid for 24hours
         .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 24))
