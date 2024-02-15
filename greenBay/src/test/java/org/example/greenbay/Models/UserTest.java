@@ -10,8 +10,6 @@ class UserTest {
     User user = new User("Jack", "password");
     assertNotNull(user.getUsername());
     assertNotNull(user.getPassword());
-
-
     assertEquals("Jack", user.getUsername());
     assertEquals("password", user.getPassword());
     assertEquals(0, user.getDollars());
