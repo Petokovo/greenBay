@@ -11,7 +11,7 @@ class BidTest {
 
   @BeforeEach
   void setup() {
-    user = new User("Jack", "password", "token", 0L);
+    user = new User("Jack", "password");
     item = new Item("Glasses", "New glasses", "https//:", 10, user);
   }
 
