@@ -24,7 +24,7 @@ public class User implements UserDetails {
   private String password;
 
   @Column(name = "dollars", nullable = false)
-  private double dollars;
+  private Integer dollars;
 
   @Column(name = "role", nullable = false)
   @Enumerated(EnumType.STRING)
@@ -63,11 +63,11 @@ public class User implements UserDetails {
     this.password = password;
   }
 
-  public double getDollars() {
+  public Integer getDollars() {
     return dollars;
   }
 
-  public void setDollars(double dollars) {
+  public void setDollars(Integer dollars) {
     this.dollars = dollars;
   }
 

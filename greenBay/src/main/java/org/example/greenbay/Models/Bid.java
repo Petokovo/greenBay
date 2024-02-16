@@ -11,7 +11,7 @@ public class Bid {
   private Long id;
 
   @Column(name = "bid_value", nullable = false)
-  private double bidValue;
+  private Integer bidValue;
 
   @Column(name = "username", nullable = false)
   private String username;
@@ -20,7 +20,7 @@ public class Bid {
   @JoinColumn(name = "item_id", nullable = false)
   private Item item;
 
-  public Bid(double bidValue, String username, Item item) {
+  public Bid(Integer bidValue, String username, Item item) {
     this.bidValue = bidValue;
     this.username = username;
     this.item = item;
@@ -36,11 +36,11 @@ public class Bid {
     this.id = id;
   }
 
-  public double getBidValue() {
+  public Integer getBidValue() {
     return bidValue;
   }
 
-  public void setBidValue(double bidValue) {
+  public void setBidValue(Integer bidValue) {
     this.bidValue = bidValue;
   }
 
