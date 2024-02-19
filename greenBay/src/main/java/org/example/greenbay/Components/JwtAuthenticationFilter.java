@@ -42,7 +42,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     }
     jwtToken = authHeader.substring(7);
     username = jwtService.extractUsername(jwtToken);
-    if(username == null){
+    if (username == null) {
       throw new UsernameNotFoundException("User not found");
     }
     if (SecurityContextHolder.getContext().getAuthentication() == null) {

@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 @Table(name = "items")
 public class Item {
   @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "id", nullable = false, updatable = false, unique = true)
   private Long id;
 
@@ -19,13 +20,13 @@ public class Item {
   private String photoUrl;
 
   @Column(name = "starting_price", nullable = false)
-  private double startingPrice;
+  private Integer startingPrice;
 
   @Column(name = "last_bid")
-  private double lastBid;
+  private Integer lastBid;
 
   @Column(name = "purchase_price")
-  private double purchasePrice;
+  private Integer purchasePrice;
 
   @Column(name = "sellable", nullable = false)
   private boolean sellable;
@@ -34,7 +35,7 @@ public class Item {
   @JoinColumn(name = "user_id", nullable = false)
   private User user;
 
-  public Item(String name, String description, String photoUrl, double startingPrice, User user) {
+  public Item(String name, String description, String photoUrl, Integer startingPrice, User user) {
     this.name = name;
     this.description = description;
     this.photoUrl = photoUrl;
@@ -77,27 +78,27 @@ public class Item {
     this.photoUrl = photoUrl;
   }
 
-  public double getStartingPrice() {
+  public Integer getStartingPrice() {
     return startingPrice;
   }
 
-  public void setStartingPrice(double startingPrice) {
+  public void setStartingPrice(Integer startingPrice) {
     this.startingPrice = startingPrice;
   }
 
-  public double getLastBid() {
+  public Integer getLastBid() {
     return lastBid;
   }
 
-  public void setLastBid(double lastBid) {
+  public void setLastBid(Integer lastBid) {
     this.lastBid = lastBid;
   }
 
-  public double getPurchasePrice() {
+  public Integer getPurchasePrice() {
     return purchasePrice;
   }
 
-  public void setPurchasePrice(double purchasePrice) {
+  public void setPurchasePrice(Integer purchasePrice) {
     this.purchasePrice = purchasePrice;
   }
 
